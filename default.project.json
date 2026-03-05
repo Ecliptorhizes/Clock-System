@@ -1,0 +1,15 @@
+{
+	"name": "ClockSystem",
+	"tree": {
+		"$className": "DataModel",
+		"ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+			"ClockSystem": {
+				"$path": "src"
+			},
+			"Packages": {
+				"$path": "Packages"
+			}
+		}
+	}
+}

@@ -1,0 +1,23 @@
+# Wally
+Packages/
+wally.lock
+
+# Rojo
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+rojo.json

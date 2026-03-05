@@ -1,0 +1,14 @@
+[package]
+name = "ecliptorhizes/clock-system"
+version = "0.1.0"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+description = "Modular server-authoritative clock system for Roblox"
+license = "MIT"
+authors = ["Ecliptorhizes"]
+
+[dependencies]
+React = "jsdotlua/react@17.0.1"
+ReactRoblox = "jsdotlua/react-roblox@17.0.1"
+Janitor = "howmanysmall/janitor@^1.14.1"
+Promise = "evaera/promise@4.0.0"
