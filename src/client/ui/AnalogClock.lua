@@ -4,7 +4,8 @@ local RunService = game:GetService("RunService")
 local React = require(ReplicatedStorage.Packages.React)
 local ReactRoblox = require(ReplicatedStorage.Packages.ReactRoblox)
 
-local shared = require(script.Parent.shared)
+local pkgRoot = script.Parent.Parent.Parent
+local time = require(pkgRoot.shared.util.time)
 
 local UPDATE_INTERVAL = 1 / 10
 
@@ -23,7 +24,7 @@ local function AnalogClock(props: AnalogClockProps)
 	end
 	local style = props.style or {}
 
-	local time, setTime = React.useState(0)
+	local timeVal, setTime = React.useState(0)
 	local mounted = React.useRef(true)
 
 	React.useEffect(function()
@@ -50,8 +51,8 @@ local function AnalogClock(props: AnalogClockProps)
 		end
 	end, { getTime })
 
-	local t = shared.secondsToTimeOfDay(time)
-	local angles = shared.timeToAngles(t.hours, t.minutes, t.seconds)
+	local t = time.secondsToTimeOfDay(timeVal)
+	local angles = time.timeToAngles(t.hours, t.minutes, t.seconds)
 
 	local faceColor = style.faceColor or Color3.fromRGB(250, 250, 250)
 	local handColor = style.handColor or Color3.fromRGB(30, 30, 30)

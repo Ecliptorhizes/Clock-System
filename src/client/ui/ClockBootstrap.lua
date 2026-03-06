@@ -8,6 +8,7 @@ local React = require(ReplicatedStorage.Packages.React)
 local ReactRoblox = require(ReplicatedStorage.Packages.ReactRoblox)
 
 local AnalogClock = require(script.Parent.AnalogClock)
+local AnalogClock3D = require(script.Parent.AnalogClock3D)
 local DigitalClock = require(script.Parent.DigitalClock)
 
 local TAG_ANALOG = "ClockSystem_Analog"
@@ -22,6 +23,9 @@ local function getAttachmentPart(instance: Instance): BasePart?
 	end
 	if instance:IsA("Model") then
 		return instance.PrimaryPart or instance:FindFirstChildWhichIsA("BasePart")
+	end
+	if instance:IsA("Folder") then
+		return instance:FindFirstChildWhichIsA("BasePart", true)
 	end
 	return nil
 end
@@ -56,7 +60,8 @@ local function mountClock(
 )
 	local ClockComponent = if clockType == "analog" then AnalogClock else DigitalClock
 
-	local element = React.createElement(ClockComponent, {
+	local root = ReactRoblox.createRoot(container)
+	root:render(React.createElement(ClockComponent, {
 		size = UDim2.fromScale(1, 1),
 		showSeconds = config.ShowSeconds,
 		format = config.Format or "HH:MM",
@@ -68,10 +73,7 @@ local function mountClock(
 			textColor = config.TextColor,
 			fontSize = config.FontSize,
 		},
-	})
-
-	local root = ReactRoblox.createRoot(container)
-	root:render(element)
+	}))
 
 	return root
 end
@@ -84,6 +86,7 @@ local function readConfig(instance: Instance): { [string]: any }
 
 	return {
 		ShowSeconds = showSeconds,
+		TestMode = instance:GetAttribute("TestMode") or false,
 		Format = instance:GetAttribute("Format") or "HH:MM",
 		FaceColor = instance:GetAttribute("FaceColor") or Color3.fromRGB(250, 250, 250),
 		HandColor = instance:GetAttribute("HandColor") or Color3.fromRGB(30, 30, 30),
@@ -109,13 +112,23 @@ end
 
 function ClockBootstrap:start()
 	local function setupClock(instance: Instance, clockType: "analog" | "digital")
+		if clockType == "analog" and (instance:IsA("Model") or instance:IsA("Folder")) and AnalogClock3D.has3DHands(instance) then
+			local config = readConfig(instance)
+			local ok = AnalogClock3D.register(instance, self._getTime, config.ShowSeconds, config.TestMode)
+			if ok then
+				instance.AncestryChanged:Connect(function()
+					if not instance:IsDescendantOf(game) then
+						AnalogClock3D.unregister(instance)
+					end
+				end)
+			end
+			return
+		end
+
 		local part = getAttachmentPart(instance)
 		if not part then
-			warn(
-				"[ClockSystem] ClockBootstrap: Cannot attach clock to",
-				instance:GetFullName(),
-				"- not a Part or Model"
-			)
+			local msg = "[ClockSystem] ClockBootstrap: Cannot attach clock to " .. instance:GetFullName() .. " - not a Part, Model, or Folder"
+			warn(msg)
 			return
 		end
 

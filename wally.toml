@@ -8,6 +8,7 @@ license = "MIT"
 authors = ["Ecliptorhizes"]
 
 [dependencies]
+Knit = "sleitnick/knit@^1.7"
 React = "jsdotlua/react@17.0.1"
 ReactRoblox = "jsdotlua/react-roblox@17.0.1"
 Janitor = "howmanysmall/janitor@^1.14.1"

@@ -1,6 +1,6 @@
-local shared = {}
+local time = {}
 
-function shared.secondsToTimeOfDay(totalSeconds: number): { hours: number, minutes: number, seconds: number }
+function time.secondsToTimeOfDay(totalSeconds: number): { hours: number, minutes: number, seconds: number }
 	local hours = math.floor(totalSeconds / 3600)
 	local remainder = totalSeconds % 3600
 	local minutes = math.floor(remainder / 60)
@@ -8,8 +8,8 @@ function shared.secondsToTimeOfDay(totalSeconds: number): { hours: number, minut
 	return { hours = hours, minutes = minutes, seconds = seconds }
 end
 
-function shared.formatTime(totalSeconds: number, format: string?): string
-	local t = shared.secondsToTimeOfDay(totalSeconds)
+function time.formatTime(totalSeconds: number, format: string?): string
+	local t = time.secondsToTimeOfDay(totalSeconds)
 	format = format or "HH:MM"
 
 	local h = string.format("%02d", t.hours)
@@ -22,11 +22,11 @@ function shared.formatTime(totalSeconds: number, format: string?): string
 		:gsub("SS", s))
 end
 
-function shared.timeToAngles(hours: number, minutes: number, seconds: number): { hour: number, minute: number, second: number }
+function time.timeToAngles(hours: number, minutes: number, seconds: number): { hour: number, minute: number, second: number }
 	local secondAngle = seconds * 6
 	local minuteAngle = minutes * 6 + seconds * 0.1
 	local hourAngle = (hours % 12) * 30 + minutes * 0.5 + seconds * (0.5 / 60)
 	return { hour = hourAngle, minute = minuteAngle, second = secondAngle }
 end
 
-return shared
+return time

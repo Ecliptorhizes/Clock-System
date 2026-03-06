@@ -1,12 +1,12 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
-local root = script
+local root = script.Parent
 local Promise = require(ReplicatedStorage.Packages.Promise)
 
-local TimeEngine = require(root.TimeEngine)
-local ClientTimeSync = require(root.ClientTimeSync)
-local ClockBootstrap = require(root.Clocks.ClockBootstrap)
-local RemoteBridge = require(root.Internal.RemoteBridge)
+local TimeEngine = require(root.server.TimeEngine)
+local ClientTimeSync = require(root.client.ClientTimeSync)
+local ClockBootstrap = require(root.client.ui.ClockBootstrap)
+local RemoteBridge = require(root.shared.Core.RemoteBridge)
 
 local _serverStarted = false
 local _clientStarted = false
@@ -59,10 +59,13 @@ end
 return {
 	TimeEngine = TimeEngine,
 	ClientTimeSync = ClientTimeSync,
-	AnalogClock = require(root.Clocks.AnalogClock),
-	DigitalClock = require(root.Clocks.DigitalClock),
+	AnalogClock = require(root.client.ui.AnalogClock),
+	AnalogClock3D = require(root.client.ui.AnalogClock3D),
+	DigitalClock = require(root.client.ui.DigitalClock),
 	ClockBootstrap = ClockBootstrap,
-	shared = require(root.Clocks.shared),
+	shared = require(root.shared.util.shared),
+	KnitServices = root.server:FindFirstChild("services"),
+	KnitControllers = root.client:FindFirstChild("controllers"),
 	startServer = startServer,
 	startClient = startClient,
 }

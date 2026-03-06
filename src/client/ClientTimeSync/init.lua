@@ -4,7 +4,8 @@ local RunService = game:GetService("RunService")
 local Janitor = require(ReplicatedStorage.Packages.Janitor)
 local Promise = require(ReplicatedStorage.Packages.Promise)
 
-local RemoteBridge = require(script.Parent.Internal.RemoteBridge)
+local pkgRoot = script.Parent.Parent
+local RemoteBridge = require(pkgRoot.shared.Core.RemoteBridge)
 
 local RESYNC_INTERVAL = 30
 

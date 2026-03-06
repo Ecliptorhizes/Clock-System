@@ -4,7 +4,8 @@ local RunService = game:GetService("RunService")
 local React = require(ReplicatedStorage.Packages.React)
 local ReactRoblox = require(ReplicatedStorage.Packages.ReactRoblox)
 
-local shared = require(script.Parent.shared)
+local pkgRoot = script.Parent.Parent.Parent
+local time = require(pkgRoot.shared.util.time)
 
 local UPDATE_INTERVAL = 1 / 10
 
@@ -23,7 +24,7 @@ local function DigitalClock(props: DigitalClockProps)
 	end
 	local style = props.style or {}
 
-	local time, setTime = React.useState(0)
+	local timeVal, setTime = React.useState(0)
 	local mounted = React.useRef(true)
 
 	React.useEffect(function()
@@ -50,7 +51,7 @@ local function DigitalClock(props: DigitalClockProps)
 		end
 	end, { getTime })
 
-	local text = shared.formatTime(time, format)
+	local text = time.formatTime(timeVal, format)
 	local textColor = style.textColor or Color3.fromRGB(255, 255, 255)
 	local fontSize = style.fontSize or 24
 
