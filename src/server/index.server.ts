@@ -5,7 +5,7 @@ import { ReplicatedStorage, RunService, Workspace } from "@rbxts/services";
 export interface ClockConfig {
     dayLengthMinutes: number; // 1440 = full day
     timescale: number; // 60 => 1 real sec = 1 game minute
-    initialMinutes: number; // 0..dayLengthMinutes
+    initialMinutes: number; // 0...dayLengthMinutes
 }
 
 export interface ClockSnapshot {
