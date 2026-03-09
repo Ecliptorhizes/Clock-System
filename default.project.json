@@ -1,87 +1,75 @@
 {
-	"name": "ClockSystem",
-	"tree": {
-		"$className": "DataModel",
-		"ReplicatedStorage": {
-			"$className": "ReplicatedStorage",
-			"Packages": {
-				"$path": "Packages"
-			},
-			"Shared": {
-				"$path": "src/shared"
-			},
-			"ClockSystem": {
-				"$className": "Folder",
-				"init": {
-					"$path": "src/shared/init.lua",
-					"$className": "ModuleScript"
-				},
-				"shared": {
-					"$path": "src/shared"
-				},
-				"server": {
-					"$path": "src/server"
-				},
-				"client": {
-					"$path": "src/client"
-				}
-			}
-		},
-		"ServerScriptService": {
-			"$className": "ServerScriptService",
-			"Server": {
-				"$path": "src/server"
-			}
-		},
-		"StarterPlayer": {
-			"$className": "StarterPlayer",
-			"StarterPlayerScripts": {
-				"$className": "StarterPlayerScripts",
-				"Client": {
-					"$path": "src/client"
-				}
-			}
-		},
-		"Workspace": {
-			"$className": "Workspace",
-			"$properties": {
-				"FilteringEnabled": true
-			},
-			"Baseplate": {
-				"$className": "Part",
-				"$properties": {
-					"Anchored": true,
-					"Color": [0.38823, 0.37254, 0.38823],
-					"Locked": true,
-					"Position": [0, -10, 0],
-					"Size": [512, 20, 512]
-				}
-			},
-			"Spawn": {
-				"$className": "Part",
-				"$properties": {
-					"Anchored": true,
-					"Position": [0, 5, 0],
-					"Size": [10, 1, 10],
-					"Transparency": 1
-				}
-			}
-		},
-		"Lighting": {
-			"$className": "Lighting",
-			"$properties": {
-				"Ambient": [0, 0, 0],
-				"Brightness": 2,
-				"GlobalShadows": true,
-				"Outlines": false,
-				"Technology": "Voxel"
-			}
-		},
-		"SoundService": {
-			"$className": "SoundService",
-			"$properties": {
-				"RespectFilteringEnabled": true
-			}
-		}
-	}
+  "name": "Clock-System",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "TS": {
+        "$path": "include"
+      },
+      "Shared": {
+        "$path": "out/shared"
+      }
+    },
+
+    "ServerScriptService": {
+      "Server": {
+        "$path": "out/server"
+      }
+    },
+
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "Client": {
+          "$path": "out/client"
+        }
+      }
+    },
+
+    "Workspace": {
+      "$properties": {
+        "FilteringEnabled": true
+      },
+      "Baseplate": {
+        "$className": "Part",
+        "$properties": {
+          "Anchored": true,
+          "Color": [
+            0.38823,
+            0.37254,
+            0.38823
+          ],
+          "Locked": true,
+          "Position": [
+            0,
+            -10,
+            0
+          ],
+          "Size": [
+            512,
+            20,
+            512
+          ]
+        }
+      }
+    },
+    "Lighting": {
+      "$properties": {
+        "Ambient": [
+          0,
+          0,
+          0
+        ],
+        "Brightness": 2,
+        "GlobalShadows": true,
+        "Outlines": false,
+        "Technology": "Voxel"
+      }
+    },
+    "SoundService": {
+      "$properties": {
+        "RespectFilteringEnabled": true
+      }
+    }
+  }
 }
